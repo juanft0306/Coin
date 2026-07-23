@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C🌍in · Importa y Vende</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">C🌍in</span>
+        <span class="logo-tagline">Importa · Calcula · Crece</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline" id="btnRefresh">
+          <i class="fas fa-sync-alt"></i> Actualizar
+        </button>
+        <button class="btn btn-danger" id="btnBorrarDatos">
+          <i class="fas fa-trash-alt"></i> Borrar datos
+        </button>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN -->
+  <div class="container">
+    <nav class="tabs-nav" id="tabsNav">
+      <button class="tab-btn active" data-tab="registro">
+        <i class="fas fa-clipboard-list"></i> Registro
+      </button>
+      <button class="tab-btn" data-tab="recomendaciones">
+        <i class="fas fa-chart-line"></i> Recomendaciones
+      </button>
+      <button class="tab-btn" data-tab="inventario">
+        <i class="fas fa-warehouse"></i> Inventario
+      </button>
+      <button class="tab-btn" data-tab="contabilidad">
+        <i class="fas fa-book"></i> Contabilidad
+      </button>
+      <button class="tab-btn" data-tab="sondeo">
+        <i class="fas fa-search-dollar"></i> Sondeo
+      </button>
+      <button class="tab-btn" data-tab="estacionalidad">
+        <i class="fas fa-calendar-alt"></i> Estacionalidad
+      </button>
+    </nav>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="container" id="mainContainer">
+    <div style="text-align:center; padding:40px; color:var(--text-secondary);">
+      <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i>
+      <p>Cargando...</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 C🌍in · Hecho con <i class="fas fa-heart" style="color:#e74c3c;"></i> para importadores venezolanos</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS (módulos) -->
+  <script type="module">
+    // Importar solo el router para iniciar
+    import './store.js';
+    import './core.js';
+    import { initRouter } from './router.js';
+    
+    // Inicializar
+    import('./core.js').then(core => {
+      core.cargarDatos();
+      if (core.generarAsientosIniciales) core.generarAsientosIniciales();
+      if (core.migrarEstacionalidad) core.migrarEstacionalidad();
+    });
+    
+    initRouter();
+  </script>
+</body>
+</html>
