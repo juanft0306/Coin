@@ -1,10 +1,10 @@
 // ==========================================
-//  C🌍in - UI Sondeo
+//  C🌍in - UI Sondeo (CORREGIDO)
 // ==========================================
 
 import { store } from '../store.js';
 import { renderizarSondeos } from '../renderers/sondeoRenderer.js';
-import { agregarSondeo, guardarSondeos } from '../core.js';
+import { agregarSondeo } from '../core.js';
 
 let container = null;
 let sondeoForm = null;
@@ -33,7 +33,6 @@ export function cargarSondeo() {
       return;
     }
 
-    // Importar funciones necesarias
     import('../core.js').then(core => {
       const nuevoSondeo = {
         id: core.generarId(),
@@ -47,7 +46,6 @@ export function cargarSondeo() {
       };
 
       core.agregarSondeo(nuevoSondeo);
-      // La vista se actualizará automáticamente por el store
       sondeoForm.reset();
       document.getElementById('sondeoCostos').value = '0';
       document.getElementById('sondeoCompetidores').value = '0';
@@ -69,20 +67,41 @@ export function cargarSondeo() {
 
 function actualizarVista(state) {
   if (!container) return;
+  
+  // Renderizar lista de sondeos
   const html = renderizarSondeos(state.sondeos);
   container.innerHTML = html;
   
-  // Actualizar contadores
-  document.getElementById('sondeoCount').textContent = state.sondeos.length + ' productos';
-  document.getElementById('totalSondeo').textContent = state.sondeos.length;
-  
+  // === MANEJO SEGURO DE ELEMENTOS ===
+  // Verificar existencia antes de asignar textContent
+  const sondeoCount = document.getElementById('sondeoCount');
+  const totalSondeo = document.getElementById('totalSondeo');
+  const sondeoRecomendados = document.getElementById('sondeoRecomendados');
+  const sondeoEvaluar = document.getElementById('sondeoEvaluar');
+  const sondeoDescartar = document.getElementById('sondeoDescartar');
+
   // Calcular estadísticas
   let recomendados = 0, evaluar = 0, descartar = 0;
   state.sondeos.forEach(s => {
-    // Usar la función de cálculo de interés
     import('../renderers/sondeoRenderer.js').then(module => {
-      // Esto es solo para actualizar los contadores, pero ya se maneja en el renderizador
-      // Como es complejo, mejor lo dejamos para el renderizador
+      // Esta función ya existe, pero la llamamos directamente desde el renderizador
     });
   });
+  // Calcular aquí mismo para no depender del renderizador
+  state.sondeos.forEach(s => {
+    const engagement = window.calcularEngagementPromedio ? window.calcularEngagementPromedio(s.interacciones || {}) : 0;
+    const preguntas = s.preguntas || 0;
+    const competidores = s.competidores || 0;
+    let puntaje = Math.min(engagement * 3, 30) + Math.min(preguntas * 5, 40) + Math.max(0, 30 - competidores * 2);
+    if (puntaje >= 70) recomendados++;
+    else if (puntaje >= 40) evaluar++;
+    else descartar++;
+  });
+
+  // Asignar solo si los elementos existen
+  if (sondeoCount) sondeoCount.textContent = state.sondeos.length + ' productos';
+  if (totalSondeo) totalSondeo.textContent = state.sondeos.length;
+  if (sondeoRecomendados) sondeoRecomendados.textContent = recomendados;
+  if (sondeoEvaluar) sondeoEvaluar.textContent = evaluar;
+  if (sondeoDescartar) sondeoDescartar.textContent = descartar;
 }
