@@ -8,7 +8,7 @@
     <span class="badge" id="sondeoCount">0 productos</span>
   </div>
 
-  <!-- Formulario para agregar producto en sondeo -->
+  <!-- ===== FORMULARIO PARA AGREGAR PRODUCTO EN SONDEO ===== -->
   <form id="sondeoForm" style="margin-bottom:20px; padding:16px; background:var(--glass-bg); border-radius:12px; border:1px solid var(--border-color);">
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
       <div class="form-group">
@@ -21,7 +21,7 @@
       </div>
       <div class="form-group" style="grid-column:1/-1;">
         <label><i class="fas fa-align-left"></i> Descripción</label>
-        <input type="text" id="sondeoDescripcion" placeholder="Breve descripción" />
+        <input type="text" id="sondeoDescripcion" placeholder="Breve descripción del producto" />
       </div>
       <div class="form-group">
         <label><i class="fas fa-dollar-sign"></i> Costo estimado (USD)</label>
@@ -33,15 +33,35 @@
       </div>
     </div>
     <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
-      <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Agregar</button>
+      <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Agregar a sondeo</button>
     </div>
   </form>
 
-  <!-- Resumen (se genera dinámicamente en el renderizador) -->
+  <!-- ===== RESUMEN DE MÉTRICAS ===== -->
+  <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; padding:12px 16px; background:var(--glass-bg); border-radius:12px; border:1px solid var(--border-color);">
+    <div>
+      <span style="color:var(--text-secondary);font-size:0.7rem;">📊 En evaluación</span><br>
+      <span id="totalSondeo" style="font-weight:700; font-size:1.2rem;">0</span>
+    </div>
+    <div>
+      <span style="color:var(--text-secondary);font-size:0.7rem;">✅ Recomendados</span><br>
+      <span id="sondeoRecomendados" style="font-weight:700; font-size:1.2rem; color:#2ecc71;">0</span>
+    </div>
+    <div>
+      <span style="color:var(--text-secondary);font-size:0.7rem;">⚠️ Evaluar</span><br>
+      <span id="sondeoEvaluar" style="font-weight:700; font-size:1.2rem; color:#f1c40f;">0</span>
+    </div>
+    <div>
+      <span style="color:var(--text-secondary);font-size:0.7rem;">❌ Descartar</span><br>
+      <span id="sondeoDescartar" style="font-weight:700; font-size:1.2rem; color:#e74c3c;">0</span>
+    </div>
+  </div>
+
+  <!-- ===== LISTA DE PRODUCTOS EN SONDEO ===== -->
   <div id="sondeoList">
     <div class="empty-state">
       <i class="fas fa-search"></i>
-      <p>No hay productos en sondeo.</p>
+      <p>No hay productos en sondeo. Agrega uno para comenzar a validar el mercado.</p>
     </div>
   </div>
 </div>
