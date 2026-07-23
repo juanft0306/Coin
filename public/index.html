@@ -2,14 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>C🌍in · Importa y Vende</title>
+  <!-- Font Awesome (iconos) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ========================================== -->
+  <!-- HEADER                                      -->
+  <!-- ========================================== -->
   <header class="header">
     <div class="container">
       <div class="logo">
@@ -23,6 +26,7 @@
         <button class="btn btn-danger" id="btnBorrarDatos">
           <i class="fas fa-trash-alt"></i> Borrar datos
         </button>
+        <!-- BOTÓN HAMBURGUESA -->
         <button class="hamburger" id="hamburgerBtn" aria-label="Menú">
           <span></span>
           <span></span>
@@ -32,7 +36,9 @@
     </div>
   </header>
 
-  <!-- NAVEGACIÓN -->
+  <!-- ========================================== -->
+  <!-- NAVEGACIÓN (TABS)                          -->
+  <!-- ========================================== -->
   <div class="container">
     <nav class="tabs-nav" id="tabsNav">
       <button class="tab-btn active" data-tab="registro">
@@ -56,36 +62,43 @@
     </nav>
   </div>
 
-  <!-- CONTENEDOR PRINCIPAL -->
+  <!-- ========================================== -->
+  <!-- CONTENEDOR PRINCIPAL (carga dinámica)      -->
+  <!-- ========================================== -->
   <main class="container" id="mainContainer">
     <div style="text-align:center; padding:40px; color:var(--text-secondary);">
       <i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i>
-      <p>Cargando...</p>
+      <p style="margin-top:12px;">Cargando...</p>
     </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 C🌍in · Hecho con <i class="fas fa-heart" style="color:#e74c3c;"></i> para importadores venezolanos</p>
+      <p>&copy; 2025 C🌍in · Hecho con <i class="fas fa-heart" style="color:#ef4444;"></i> para importadores venezolanos</p>
     </div>
   </footer>
 
-  <!-- SCRIPTS (módulos) -->
+  <!-- ========================================== -->
+  <!-- SCRIPTS (módulos ES)                       -->
+  <!-- ========================================== -->
   <script type="module">
-    // Importar solo el router para iniciar
     import './store.js';
     import './core.js';
     import { initRouter } from './router.js';
     
-    // Inicializar
+    // Inicializar datos
     import('./core.js').then(core => {
       core.cargarDatos();
       if (core.generarAsientosIniciales) core.generarAsientosIniciales();
       if (core.migrarEstacionalidad) core.migrarEstacionalidad();
     });
     
+    // Iniciar router
     initRouter();
   </script>
+
 </body>
 </html>
