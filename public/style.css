@@ -47,16 +47,16 @@ body {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
   width: 100%;
 }
 
 /* ==========================================
-   SCROLLBAR PERSONALIZADA
+   SCROLLBAR
    ========================================== */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
@@ -65,15 +65,12 @@ body {
   background: var(--gold);
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--gold-light);
-}
 
 /* ==========================================
-   ANIMACIONES MEJORADAS
+   ANIMACIONES
    ========================================== */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes pulseGlow {
@@ -93,28 +90,19 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 @keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
+  from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes borderGlow {
-  0%, 100% { border-color: rgba(247, 201, 72, 0.2); }
-  50% { border-color: rgba(247, 201, 72, 0.6); }
 }
 
 /* ==========================================
-   HEADER MEJORADO
+   HEADER
    ========================================== */
 .header {
-  background: rgba(10, 14, 26, 0.8);
+  background: rgba(10, 14, 26, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
-  padding: 12px 0;
+  padding: 10px 0;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -126,18 +114,18 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .logo-icon {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #f7c948, #f5b342, #f0a030, #f7c948);
   background-size: 300% 300%;
@@ -147,69 +135,52 @@ body {
   animation: shimmer 5s ease-in-out infinite;
   letter-spacing: 1px;
   transition: transform 0.3s ease;
-  text-shadow: 0 0 60px rgba(247, 201, 72, 0.15);
 }
 .logo-icon:hover {
-  transform: scale(1.05) rotate(-2deg);
+  transform: scale(1.05);
 }
 
 .logo-tagline {
   font-size: 0.6rem;
   color: var(--text-secondary);
   font-weight: 400;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   background: var(--glass-bg);
-  padding: 3px 12px;
+  padding: 3px 10px;
   border-radius: 30px;
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(10px);
 }
 
 .header-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .header-actions .btn {
-  font-size: 0.75rem;
-  padding: 7px 16px;
-  border-radius: 30px;
+  font-size: 0.7rem;
+  padding: 6px 12px;
 }
 
 /* ==========================================
-   BOTONES MEJORADOS
+   BOTONES
    ========================================== */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 20px;
+  gap: 6px;
+  padding: 8px 16px;
   border: none;
   border-radius: 30px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
   white-space: nowrap;
   font-family: inherit;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.btn:hover::before {
-  opacity: 1;
 }
 
 .btn-primary {
@@ -218,7 +189,7 @@ body {
   box-shadow: 0 4px 25px rgba(247, 201, 72, 0.25);
 }
 .btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 35px rgba(247, 201, 72, 0.4);
 }
 
@@ -232,23 +203,19 @@ body {
   border-color: var(--gold);
   color: var(--gold);
   transform: translateY(-2px);
-  box-shadow: 0 4px 25px rgba(247, 201, 72, 0.15);
 }
 
 .btn-small {
-  padding: 5px 14px;
-  font-size: 0.7rem;
+  padding: 4px 12px;
+  font-size: 0.65rem;
   background: var(--glass-bg);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 30px;
-  backdrop-filter: blur(10px);
 }
 .btn-small:hover {
   border-color: var(--gold);
   color: var(--gold);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(247, 201, 72, 0.1);
 }
 
 .btn-danger {
@@ -256,14 +223,13 @@ body {
   border: 1.5px solid rgba(231, 76, 60, 0.3);
   color: #ef4444;
   backdrop-filter: blur(10px);
-  border-radius: 30px;
-  padding: 7px 16px;
-  font-size: 0.75rem;
+  padding: 6px 12px;
+  font-size: 0.7rem;
 }
 .btn-danger:hover {
   background: #ef4444;
   color: #fff;
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(-2px);
   box-shadow: 0 4px 25px rgba(231, 76, 60, 0.35);
 }
 
@@ -277,36 +243,34 @@ body {
   backdrop-filter: blur(20px);
   border-radius: var(--radius);
   padding: 5px;
-  margin: 20px 0 0 0;
+  margin: 16px 0 0 0;
   border: 1px solid var(--glass-border);
   overflow-x: auto;
   flex-wrap: nowrap;
-  transition: all 0.3s;
   -webkit-overflow-scrolling: touch;
 }
 
 .tab-btn {
   flex: 1;
   min-width: fit-content;
-  padding: 10px 18px;
+  padding: 8px 12px;
   border: none;
   border-radius: 12px;
   background: transparent;
   color: var(--text-secondary);
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   white-space: nowrap;
-  position: relative;
   font-family: inherit;
 }
 .tab-btn i {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   transition: transform 0.3s;
 }
 .tab-btn:hover {
@@ -314,7 +278,7 @@ body {
   color: var(--text-primary);
 }
 .tab-btn:hover i {
-  transform: scale(1.2) rotate(-5deg);
+  transform: scale(1.2);
 }
 .tab-btn.active {
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
@@ -322,25 +286,21 @@ body {
   box-shadow: 0 4px 25px rgba(247, 201, 72, 0.25);
   animation: pulseGlow 2s infinite;
 }
-.tab-btn.active i {
-  transform: scale(1.1);
-}
 
 /* ==========================================
-   HAMBURGUESA MEJORADA
+   HAMBURGUESA
    ========================================== */
 .hamburger {
   display: none;
   flex-direction: column;
   justify-content: space-around;
-  width: 28px;
-  height: 24px;
+  width: 26px;
+  height: 22px;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   z-index: 1001;
-  transition: all 0.3s;
 }
 .hamburger:focus {
   outline: none;
@@ -371,31 +331,20 @@ body {
 }
 
 /* ==========================================
-   CARDS MEJORADAS (Glassmorphism Premium)
+   CARDS
    ========================================== */
 .card {
   background: var(--glass-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: var(--radius);
-  padding: 24px 20px;
-  margin: 20px 0;
+  padding: 20px 16px;
+  margin: 16px 0;
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
   animation: fadeInUp 0.6s ease-out;
   transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
 }
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(247, 201, 72, 0.03), transparent 60%);
-  pointer-events: none;
-}
-
 .card:hover {
   border-color: rgba(247, 201, 72, 0.2);
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
@@ -406,63 +355,54 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
-
 .card-header h2 {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: linear-gradient(135deg, var(--gold), var(--electric-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .card-header h2 i {
   -webkit-text-fill-color: initial;
   color: var(--gold);
-  font-size: 1.2rem;
 }
 
 .badge {
   background: var(--glass-bg);
-  padding: 4px 14px;
+  padding: 3px 12px;
   border-radius: 30px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
-  transition: all 0.3s;
   white-space: nowrap;
-  font-weight: 500;
-}
-.badge:hover {
-  border-color: var(--gold);
-  color: var(--gold);
 }
 
 /* ==========================================
-   FORM MEJORADO
+   FORM
    ========================================== */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   min-width: 0;
 }
 .form-group label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-secondary);
   display: flex;
@@ -472,16 +412,16 @@ body {
 .form-group label i {
   color: var(--gold);
   width: 18px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .form-group input,
 .form-group select {
   background: var(--glass-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 11px 16px;
+  padding: 10px 14px;
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   transition: all 0.3s;
   backdrop-filter: blur(10px);
   width: 100%;
@@ -493,16 +433,14 @@ body {
   outline: none;
   border-color: var(--gold);
   box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.1);
-  background: rgba(255, 255, 255, 0.06);
 }
 .form-group input::placeholder {
   color: rgba(255, 255, 255, 0.2);
-  font-size: 0.85rem;
 }
 .form-group small {
   color: var(--text-muted);
-  font-size: 0.7rem;
-  margin-top: 3px;
+  font-size: 0.65rem;
+  margin-top: 2px;
 }
 
 /* ==========================================
@@ -511,37 +449,33 @@ body {
 .extra-gastos-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 #gastosWrapper {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   max-height: 150px;
   overflow-y: auto;
-  padding-right: 4px;
 }
 .gasto-item {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  animation: fadeInUp 0.3s ease;
 }
 .gasto-item input[type="text"] {
   flex: 2;
-  min-width: 0;
 }
 .gasto-item input[type="number"] {
   flex: 1;
-  min-width: 0;
 }
 .btn-remove-gasto {
   background: transparent;
   border: none;
   color: #ef4444;
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 0 6px;
+  font-size: 0.85rem;
+  padding: 0 4px;
   transition: transform 0.3s;
   flex-shrink: 0;
   border-radius: 50%;
@@ -569,36 +503,33 @@ body {
 
 .productos-table {
   width: 100%;
-  min-width: 560px;
+  min-width: 520px;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
 }
 .productos-table th {
   text-align: left;
-  padding: 8px 6px;
+  padding: 6px 4px;
   border-bottom: 2px solid var(--border-color);
   color: var(--text-secondary);
   font-weight: 500;
-  font-size: 0.75rem;
-  white-space: nowrap;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .productos-table td {
-  padding: 5px 3px;
+  padding: 4px 3px;
   border-bottom: 1px solid var(--border-color);
-  vertical-align: middle;
 }
 .productos-table input {
   width: 100%;
   background: var(--glass-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 6px 8px;
+  padding: 5px 7px;
   color: var(--text-primary);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: all 0.3s;
-  min-width: 0;
   font-family: inherit;
 }
 .productos-table input:focus {
@@ -608,15 +539,14 @@ body {
 }
 .productos-table input::placeholder {
   color: rgba(255, 255, 255, 0.15);
-  font-size: 0.7rem;
 }
 .btn-remove-fila {
   background: transparent;
   border: none;
   color: #ef4444;
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 2px 6px;
+  font-size: 0.85rem;
+  padding: 2px 4px;
   transition: transform 0.3s;
   border-radius: 50%;
   width: 28px;
@@ -631,25 +561,23 @@ body {
 }
 
 /* ==========================================
-   PRODUCT ITEMS (Recomendaciones)
+   PRODUCT ITEMS
    ========================================== */
 .product-item {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
   border-radius: 14px;
-  padding: 18px 20px;
+  padding: 14px 16px;
   border-left: 4px solid var(--gold);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 20px;
-  align-items: start;
-  animation: fadeInUp 0.4s ease;
+  gap: 8px 16px;
   border: 1px solid var(--glass-border);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .product-item:hover {
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-3px);
   border-color: var(--gold);
   box-shadow: 0 12px 40px rgba(247, 201, 72, 0.08);
 }
@@ -659,33 +587,31 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 .product-item .product-header h3 {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 .product-item .sku {
   color: var(--text-muted);
-  font-size: 0.7rem;
-  font-weight: 400;
+  font-size: 0.65rem;
   background: var(--glass-bg);
-  padding: 1px 10px;
+  padding: 1px 8px;
   border-radius: 30px;
   border: 1px solid var(--border-color);
 }
 .product-item .recomendacion {
   font-weight: 700;
-  padding: 3px 14px;
+  padding: 2px 12px;
   border-radius: 30px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   background: var(--glass-bg);
   border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
   white-space: nowrap;
 }
 .product-item .metric {
@@ -693,18 +619,18 @@ body {
   flex-direction: column;
 }
 .product-item .metric .label {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: var(--text-muted);
 }
 .product-item .metric .value {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 .product-item .metric .value .small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 400;
   color: var(--text-secondary);
 }
@@ -712,9 +638,9 @@ body {
   grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-  padding-top: 12px;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 10px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -724,72 +650,64 @@ body {
 .inventario-item {
   background: var(--glass-bg);
   border-radius: 14px;
-  padding: 16px 18px;
-  margin-bottom: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
   border: 1px solid var(--border-color);
   transition: all 0.3s;
-  overflow: hidden;
-  animation: fadeInUp 0.4s ease;
 }
 .inventario-item:hover {
   border-color: var(--gold);
-  transform: translateX(6px);
-  box-shadow: 0 8px 30px rgba(247, 201, 72, 0.05);
+  transform: translateX(4px);
 }
 .inventario-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 .inventario-header h3 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 .sku-badge {
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
   color: #0a0e1a;
-  padding: 2px 12px;
+  padding: 2px 10px;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 .inventario-resumen {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-}
-.inventario-resumen .badge {
-  font-size: 0.7rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
 }
 .lotes-table {
   width: 100%;
-  min-width: 400px;
+  min-width: 360px;
   border-collapse: collapse;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 }
 .lotes-table th {
   text-align: left;
-  padding: 7px 5px;
+  padding: 6px 4px;
   border-bottom: 2px solid var(--border-color);
   color: var(--text-secondary);
   font-weight: 500;
 }
 .lotes-table td {
-  padding: 7px 5px;
+  padding: 6px 4px;
   border-bottom: 1px solid var(--border-color);
 }
 .lote-id {
   font-family: monospace;
   color: var(--text-muted);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 /* ==========================================
@@ -797,11 +715,11 @@ body {
    ========================================== */
 .contab-tabs {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   flex-wrap: wrap;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   background: var(--glass-bg);
-  padding: 6px;
+  padding: 4px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
 }
@@ -809,9 +727,9 @@ body {
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  padding: 6px 14px;
+  padding: 4px 12px;
   border-radius: 30px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   transition: all 0.3s;
   cursor: pointer;
   white-space: nowrap;
@@ -828,19 +746,19 @@ body {
 }
 .contabilidad-table {
   width: 100%;
-  min-width: 500px;
+  min-width: 460px;
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .contabilidad-table th {
   background: var(--glass-bg);
-  padding: 9px 12px;
+  padding: 8px 10px;
   text-align: left;
   border-bottom: 2px solid var(--border-color);
   font-weight: 500;
 }
 .contabilidad-table td {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-bottom: 1px solid var(--border-color);
 }
 .contabilidad-table tr:hover td {
@@ -849,14 +767,13 @@ body {
 .cuenta-t {
   background: var(--glass-bg);
   border-radius: 12px;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border: 1px solid var(--border-color);
   transition: all 0.3s;
 }
 .cuenta-t:hover {
   border-color: var(--gold);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(247, 201, 72, 0.05);
+  transform: translateY(-2px);
 }
 
 /* ==========================================
@@ -864,20 +781,18 @@ body {
    ========================================== */
 .empty-state {
   text-align: center;
-  padding: 50px 20px;
+  padding: 40px 16px;
   color: var(--text-secondary);
 }
 .empty-state i {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--border-color);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   display: block;
   animation: float 3s ease-in-out infinite;
 }
 .empty-state p {
-  font-size: 0.95rem;
-  max-width: 400px;
-  margin: 0 auto;
+  font-size: 0.85rem;
 }
 
 /* ==========================================
@@ -885,11 +800,11 @@ body {
    ========================================== */
 .footer {
   margin-top: auto;
-  padding: 20px 0;
+  padding: 16px 0;
   text-align: center;
   border-top: 1px solid var(--border-color);
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
 }
@@ -898,7 +813,7 @@ body {
 }
 
 /* ==========================================
-   MODALES MEJORADOS
+   MODALES
    ========================================== */
 .modal-overlay {
   position: fixed;
@@ -914,7 +829,7 @@ body {
   justify-content: center;
   z-index: 9999;
   animation: fadeIn 0.3s ease;
-  padding: 20px;
+  padding: 16px;
 }
 
 .modal-content {
@@ -933,28 +848,28 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 24px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
   background: var(--glass-bg);
 }
 .modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  gap: 8px;
 }
 .modal-close {
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: all 0.3s;
-  padding: 0 8px;
+  padding: 0 6px;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -965,26 +880,26 @@ body {
   background: rgba(239, 68, 68, 0.1);
 }
 .modal-body {
-  padding: 24px;
+  padding: 20px;
 }
 .modal-footer {
-  padding: 16px 24px;
+  padding: 14px 20px;
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 8px;
   background: var(--glass-bg);
 }
 
 /* ==========================================
-   RESPONSIVE MEJORADO
+   RESPONSIVE: MOVIL
    ========================================== */
 @media (max-width: 992px) {
   .container {
-    padding: 0 16px;
+    padding: 0 14px;
   }
   .card {
-    padding: 18px 16px;
+    padding: 16px 14px;
   }
   .form-row {
     grid-template-columns: 1fr;
@@ -994,37 +909,32 @@ body {
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 12px;
+    padding: 0 10px;
   }
   
-  .header .container {
-    gap: 8px;
+  /* Header */
+  .header {
+    padding: 8px 0;
   }
-  
   .logo-icon {
     font-size: 1.6rem;
   }
   .logo-tagline {
     font-size: 0.5rem;
     padding: 2px 8px;
-    letter-spacing: 1.5px;
-  }
-  
-  .header-actions {
-    gap: 6px;
   }
   .header-actions .btn {
     font-size: 0.6rem;
-    padding: 5px 10px;
+    padding: 4px 10px;
   }
   .header-actions .btn i {
     font-size: 0.6rem;
   }
   
+  /* Hamburguesa visible */
   .hamburger {
     display: flex;
   }
-  
   .tabs-nav {
     display: none;
     flex-direction: column;
@@ -1034,7 +944,7 @@ body {
     backdrop-filter: blur(30px);
     border-radius: 12px;
     padding: 8px;
-    margin-top: 10px;
+    margin-top: 8px;
     border: 1px solid var(--glass-border);
   }
   .tabs-nav.open {
@@ -1042,57 +952,93 @@ body {
   }
   .tab-btn {
     justify-content: flex-start;
-    padding: 10px 14px;
-    font-size: 0.8rem;
+    padding: 8px 12px;
+    font-size: 0.75rem;
   }
   .tab-btn i {
-    width: 22px;
-    font-size: 0.85rem;
+    width: 20px;
+    font-size: 0.8rem;
   }
   
+  /* Cards */
   .card {
-    padding: 14px 12px;
-    margin: 14px 0;
-    border-radius: 14px;
+    padding: 12px 10px;
+    margin: 12px 0;
+    border-radius: 12px;
   }
   .card-header h2 {
     font-size: 1rem;
   }
+  .badge {
+    font-size: 0.6rem;
+    padding: 2px 10px;
+  }
   
+  /* Formulario */
+  .form-row {
+    gap: 10px;
+  }
+  .form-group input,
+  .form-group select {
+    font-size: 0.8rem;
+    padding: 9px 12px;
+    border-radius: 10px;
+  }
+  .form-group label {
+    font-size: 0.7rem;
+  }
+  
+  /* Tablas */
+  .productos-table {
+    font-size: 0.7rem;
+    min-width: 460px;
+  }
+  .productos-table th {
+    padding: 4px 3px;
+    font-size: 0.6rem;
+  }
+  .productos-table td {
+    padding: 3px 2px;
+  }
+  .productos-table input {
+    font-size: 0.7rem;
+    padding: 4px 6px;
+  }
+  
+  /* Product items */
   .product-item {
     grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 14px;
+    gap: 6px;
+    padding: 12px;
   }
   .product-item .product-header h3 {
-    font-size: 0.9rem;
-  }
-  .product-item .metric .value {
     font-size: 0.85rem;
   }
-  .product-actions {
-    gap: 6px;
+  .product-item .metric .value {
+    font-size: 0.8rem;
   }
   .product-actions .btn-small {
     font-size: 0.6rem;
-    padding: 4px 10px;
+    padding: 3px 10px;
   }
   
+  /* Inventario */
   .inventario-item {
-    padding: 12px 14px;
+    padding: 10px 12px;
   }
   .inventario-header h3 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .lotes-table {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     min-width: 300px;
   }
   .lotes-table th,
   .lotes-table td {
-    padding: 5px 3px;
+    padding: 4px 3px;
   }
   
+  /* Contabilidad */
   .contab-tabs {
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -1101,19 +1047,19 @@ body {
     -webkit-overflow-scrolling: touch;
   }
   .contab-tab {
-    font-size: 0.65rem;
-    padding: 4px 10px;
-    white-space: nowrap;
+    font-size: 0.6rem;
+    padding: 3px 10px;
   }
   .contabilidad-table {
-    font-size: 0.7rem;
-    min-width: 350px;
+    font-size: 0.65rem;
+    min-width: 340px;
   }
   .contabilidad-table th,
   .contabilidad-table td {
-    padding: 5px 8px;
+    padding: 4px 6px;
   }
   
+  /* Gastos extra */
   .gasto-item {
     flex-wrap: wrap;
   }
@@ -1124,52 +1070,52 @@ body {
     flex: 1 1 60%;
   }
   
+  /* Botones */
   .btn {
-    padding: 6px 14px;
-    font-size: 0.75rem;
-  }
-  .btn-small {
-    padding: 4px 10px;
+    padding: 5px 12px;
     font-size: 0.7rem;
   }
-  
-  .form-group input,
-  .form-group select {
-    font-size: 0.8rem;
-    padding: 9px 12px;
+  .btn-small {
+    padding: 3px 10px;
+    font-size: 0.6rem;
+  }
+  .btn-danger {
+    padding: 4px 10px;
+    font-size: 0.6rem;
   }
   
+  /* Modales */
   .modal-content {
     max-width: 100%;
     margin: 10px;
     border-radius: 14px;
   }
   .modal-body {
-    padding: 16px;
+    padding: 14px;
   }
   .modal-header {
-    padding: 14px 18px;
+    padding: 12px 16px;
   }
   .modal-footer {
-    padding: 14px 18px;
+    padding: 12px 16px;
+  }
+  
+  /* Empty state */
+  .empty-state {
+    padding: 30px 12px;
+  }
+  .empty-state i {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 400px) {
   .container {
-    padding: 0 8px;
+    padding: 0 6px;
   }
   .card {
-    padding: 10px 8px;
-    margin: 10px 0;
-  }
-  .productos-table {
-    min-width: 320px;
-    font-size: 0.6rem;
-  }
-  .productos-table input {
-    font-size: 0.6rem;
-    padding: 3px 4px;
+    padding: 8px 6px;
+    margin: 8px 0;
   }
   .logo-icon {
     font-size: 1.3rem;
@@ -1195,16 +1141,28 @@ body {
     font-size: 0.65rem;
     padding: 6px 10px;
   }
+  .productos-table {
+    min-width: 320px;
+    font-size: 0.6rem;
+  }
+  .productos-table input {
+    font-size: 0.6rem;
+    padding: 3px 4px;
+  }
   .lotes-table {
     min-width: 240px;
     font-size: 0.55rem;
   }
   .contabilidad-table {
     min-width: 260px;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
   .contab-tab {
     font-size: 0.55rem;
-    padding: 3px 8px;
+    padding: 2px 8px;
+  }
+  .btn {
+    font-size: 0.6rem;
+    padding: 4px 10px;
   }
 }
