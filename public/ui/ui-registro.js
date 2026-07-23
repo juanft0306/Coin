@@ -72,6 +72,7 @@ function agregarFilaProducto(nombre = '', sku = '', precio = '', cantidad = '', 
   const removeBtn = tr.querySelector('.btn-remove-fila');
   removeBtn.addEventListener('click', () => {
     tr.remove();
+    // Si después de eliminar no quedan filas, no hacemos nada (el usuario puede agregar con el botón)
   });
   productosBody.appendChild(tr);
 }
@@ -131,11 +132,10 @@ export function cargarRegistro() {
     return;
   }
 
-  // Inicializar productos
+  // Inicializar productos con UNA sola fila (cambio aquí)
   productosBody.innerHTML = '';
   productoRowIndex = 0;
-  agregarFilaProducto();
-  agregarFilaProducto();
+  agregarFilaProducto(); // ANTES eran 2, AHORA es 1
 
   // Inicializar gastos
   gastosWrapper.innerHTML = '';
@@ -231,10 +231,9 @@ function configurarEventosRegistro() {
     };
     agregarAsiento(asientoCompra);
 
-    // Resetear formulario
+    // Resetear formulario: UNA sola fila (cambio aquí)
     productosBody.innerHTML = '';
-    agregarFilaProducto();
-    agregarFilaProducto();
+    agregarFilaProducto(); // ANTES eran 2, AHORA es 1
     document.getElementById('flete').value = '0';
     gastosWrapper.innerHTML = '';
     agregarGasto();
@@ -246,4 +245,4 @@ function configurarEventosRegistro() {
 
   addGastoBtn.addEventListener('click', () => agregarGasto());
   addProductoBtn.addEventListener('click', () => agregarFilaProducto());
-  }
+}
