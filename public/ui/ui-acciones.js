@@ -92,7 +92,6 @@ window.confirmarVenta = function(id) {
   
   actualizarEstacionalidad(prod, 'venta', cantidad, new Date().toISOString());
   
-  // Actualizar store y persistir
   const nuevosProductos = state.productos.map(p => p.id === prod.id ? prod : p);
   store.setState({ productos: nuevosProductos });
   guardarProductos();
@@ -290,6 +289,92 @@ window.confirmarRedes = function(id) {
 };
 
 // ==========================================
+//  COMPETENCIA
+// ==========================================
+window.mostrarModalCompetencia = function(id) {
+  const state = store.getState();
+  const prod = state.productos.find(p => p.id === id);
+  if (!prod) return alert('Producto no encontrado');
+  const competidoresList = prod.competidores || [];
+  const listaHTML = competidoresList.length > 0 ? `
+    <div style="margin:12px 0;max-height:150px;overflow-y:auto;">
+      ${competidoresList.map((c, idx) => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-color);">
+          <span><strong>${c.nombre}</strong> ${formatearUSD(c.precio)} ${c.plataforma ? `(${c.plataforma})` : ''}</span>
+          <button class="btn-small" onclick="window.eliminarCompetidor('${id}',${idx})" style="color:#e74c3c;"><i class="fas fa-trash"></i></button>
+        </div>
+      `).join('')}
+    </div>
+  ` : '<p style="color:var(--text-secondary);font-size:0.9rem;">No hay competidores.</p>';
+  
+  const modalHTML = `
+    <div class="modal-overlay" id="modalCompetencia">
+      <div class="modal-content" style="max-width:500px;">
+        <div class="modal-header">
+          <h3><i class="fas fa-store" style="color:var(--gold);"></i> Competencia</h3>
+          <button class="modal-close" onclick="window.cerrarModal('modalCompetencia')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="color:var(--text-secondary);margin-bottom:12px;">Producto: <strong>${prod.nombre}</strong> (SKU: ${prod.sku})</p>
+          <div style="background:var(--glass-bg);padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid var(--border-color);">
+            <h4 style="margin-bottom:8px;">📊 Competidores registrados</h4>
+            ${listaHTML}
+          </div>
+          <h4 style="margin:12px 0 8px;">➕ Agregar competidor</h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <input type="text" id="inputCompNombre" placeholder="Nombre" style="background:var(--glass-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 12px;color:var(--text-primary);" />
+            <input type="number" id="inputCompPrecio" placeholder="Precio (USD)" step="0.01" style="background:var(--glass-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 12px;color:var(--text-primary);" />
+            <input type="text" id="inputCompPlataforma" placeholder="Plataforma (opcional)" style="grid-column:1/-1;background:var(--glass-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 12px;color:var(--text-primary);" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="window.cerrarModal('modalCompetencia')">Cerrar</button>
+          <button class="btn btn-primary" onclick="window.agregarCompetidor('${id}')"><i class="fas fa-plus"></i> Agregar</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+};
+
+window.agregarCompetidor = function(id) {
+  const state = store.getState();
+  const prod = state.productos.find(p => p.id === id);
+  if (!prod) return alert('Producto no encontrado');
+  const nombre = document.getElementById('inputCompNombre')?.value.trim();
+  const precio = parseFloat(document.getElementById('inputCompPrecio')?.value);
+  const plataforma = document.getElementById('inputCompPlataforma')?.value.trim() || '';
+  if (!nombre) return alert('⚠️ Ingresa el nombre.');
+  if (!precio || precio <= 0) return alert('⚠️ Ingresa un precio válido.');
+  if (!prod.competidores) prod.competidores = [];
+  prod.competidores.push({ nombre, precio, plataforma, fecha: new Date().toISOString() });
+  
+  const nuevosProductos = state.productos.map(p => p.id === prod.id ? prod : p);
+  store.setState({ productos: nuevosProductos });
+  guardarProductos();
+  
+  window.cerrarModal('modalCompetencia');
+  alert(`✅ Competidor "${nombre}" agregado.`);
+};
+
+window.eliminarCompetidor = function(id, index) {
+  if (!confirm('¿Eliminar este competidor?')) return;
+  const state = store.getState();
+  const prod = state.productos.find(p => p.id === id);
+  if (!prod) return;
+  prod.competidores.splice(index, 1);
+  
+  const nuevosProductos = state.productos.map(p => p.id === prod.id ? prod : p);
+  store.setState({ productos: nuevosProductos });
+  guardarProductos();
+  
+  if (document.getElementById('modalCompetencia')) {
+    window.cerrarModal('modalCompetencia');
+    window.mostrarModalCompetencia(id);
+  }
+};
+
+// ==========================================
 //  ELIMINAR PRODUCTO
 // ==========================================
 window.eliminarProducto = function(id) {
@@ -302,26 +387,6 @@ window.eliminarProducto = function(id) {
   
   alert('✅ Producto eliminado correctamente.');
 };
-
-// ==========================================
-//  COMPETENCIA (solo ejemplos; el resto se puede implementar igual)
-// ==========================================
-window.mostrarModalCompetencia = function(id) {
-  // ... (código similar al existente)
-};
-
-window.agregarCompetidor = function(id) {
-  // ... (código similar al existente)
-};
-
-window.eliminarCompetidor = function(id, index) {
-  // ... (código similar al existente)
-};
-
-// ==========================================
-//  SONDEO: REDES, PREGUNTAS, REGISTRO DIARIO, IMPORTAR, ELIMINAR
-// ==========================================
-// (Implementar de manera similar usando store y core)
 
 // ==========================================
 //  SONDEO: REDES
@@ -477,12 +542,10 @@ window.confirmarRegistroDiario = function(id) {
   const preguntas = parseInt(document.getElementById('inputDiarioPreguntas')?.value) || 0;
   if (vistas < 0 || preguntas < 0) return alert('⚠️ Los valores no pueden ser negativos.');
   
-  import('../core.js').then(core => {
-    const resultado = core.agregarRegistroSondeo(id, vistas, preguntas);
-    if (!resultado) return alert('❌ Error al guardar.');
-    window.cerrarModal('modalRegistroDiario');
-    alert(`✅ Registro guardado.\nVistas: ${vistas}\nPreguntas: ${preguntas}`);
-  });
+  const resultado = agregarRegistroSondeo(id, vistas, preguntas);
+  if (!resultado) return alert('❌ Error al guardar.');
+  window.cerrarModal('modalRegistroDiario');
+  alert(`✅ Registro guardado.\nVistas: ${vistas}\nPreguntas: ${preguntas}`);
 };
 
 // ==========================================
@@ -494,36 +557,35 @@ window.moverSondeoAProducto = function(id) {
   if (!sondeo) return alert('Sondeo no encontrado');
   if (!confirm(`¿Importar "${sondeo.nombre}" al registro?`)) return;
   
-  import('../core.js').then(core => {
-    const nuevoProducto = {
-      id: core.generarId(),
-      loteId: core.generarId(),
-      nombre: sondeo.nombre,
-      sku: core.generarSKU(sondeo.nombre, state.productos.map(p => p.sku)),
-      atributo: '',
-      precioUnitarioChina: Math.round(sondeo.costosEstimados * 0.7 * 100) / 100 || 0.01,
-      cantidadImportada: 50,
-      fleteInternacional: 0,
-      gastosExtra: [],
-      costoUnitarioTotal: sondeo.costosEstimados || 0.01,
-      precioVentaSugerido: sondeo.precioEstimado,
-      margenGanancia: 40,
-      fechaLlegada: new Date().toISOString(),
-      interacciones: sondeo.interacciones || { instagram: {}, tiktok: {}, marketplace: {} },
-      ventasRegistradas: [],
-      totalVendido: 0,
-      preguntasRegistradas: sondeo.preguntas > 0 ? [{ cantidad: sondeo.preguntas, fecha: new Date().toISOString() }] : [],
-      competidores: [],
-      estacionalidad: sondeo.estacionalidad || core.inicializarEstacionalidad()
-    };
-    
-    const nuevosProductos = [...state.productos, nuevoProducto];
-    const nuevosSondeos = state.sondeos.filter(s => s.id !== id);
-    store.setState({ productos: nuevosProductos, sondeos: nuevosSondeos });
-    core.guardarProductos();
-    core.guardarSondeos();
-    alert(`✅ "${sondeo.nombre}" importado al registro de productos.`);
-  });
+  const nuevoProducto = {
+    id: generarId(),
+    loteId: generarId(),
+    nombre: sondeo.nombre,
+    sku: generarSKU(sondeo.nombre, state.productos.map(p => p.sku)),
+    atributo: '',
+    precioUnitarioChina: Math.round(sondeo.costosEstimados * 0.7 * 100) / 100 || 0.01,
+    cantidadImportada: 50,
+    fleteInternacional: 0,
+    gastosExtra: [],
+    costoUnitarioTotal: sondeo.costosEstimados || 0.01,
+    precioVentaSugerido: sondeo.precioEstimado,
+    margenGanancia: 40,
+    fechaLlegada: new Date().toISOString(),
+    interacciones: sondeo.interacciones || { instagram: {}, tiktok: {}, marketplace: {} },
+    ventasRegistradas: [],
+    totalVendido: 0,
+    preguntasRegistradas: sondeo.preguntas > 0 ? [{ cantidad: sondeo.preguntas, fecha: new Date().toISOString() }] : [],
+    competidores: [],
+    estacionalidad: sondeo.estacionalidad || inicializarEstacionalidad()
+  };
+  
+  const nuevosProductos = [...state.productos, nuevoProducto];
+  const nuevosSondeos = state.sondeos.filter(s => s.id !== id);
+  store.setState({ productos: nuevosProductos, sondeos: nuevosSondeos });
+  guardarProductos();
+  guardarSondeos();
+  
+  alert(`✅ "${sondeo.nombre}" importado al registro de productos.`);
 };
 
 // ==========================================
