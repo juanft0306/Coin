@@ -1,0 +1,25 @@
+<!-- ========================================== -->
+<!-- PANTALLA: ESTACIONALIDAD                    -->
+<!-- ========================================== -->
+
+<div class="card">
+  <div class="card-header">
+    <h2><i class="fas fa-calendar-alt"></i> Estacionalidad</h2>
+    <span class="badge" id="estacionalidadCount">0 elementos</span>
+  </div>
+
+  <!-- Filtros -->
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+    <button class="btn btn-small filter-btn active" data-filter="todos">Todos</button>
+    <button class="btn btn-small filter-btn" data-filter="productos">📦 Productos</button>
+    <button class="btn btn-small filter-btn" data-filter="sondeos">🔍 Sondeos</button>
+  </div>
+
+  <!-- Resumen (se genera dinámicamente en el renderizador) -->
+  <div id="estacionalidadList">
+    <div class="empty-state">
+      <i class="fas fa-calendar"></i>
+      <p>No hay datos de estacionalidad.</p>
+    </div>
+  </div>
+</div>
