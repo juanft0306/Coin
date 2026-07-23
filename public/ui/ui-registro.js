@@ -13,7 +13,7 @@ let loteForm, productosBody, addProductoBtn, addGastoBtn, gastosWrapper;
 let gastoIndex = 0, productoRowIndex = 0;
 
 // ==========================================
-//  FUNCIONES AUXILIARES (gastos y productos)
+//  FUNCIONES AUXILIARES (gastos)
 // ==========================================
 function agregarGasto(concepto = '', monto = '') {
   gastoIndex++;
@@ -57,6 +57,9 @@ function obtenerGastos() {
   return gastos;
 }
 
+// ==========================================
+//  FUNCIONES AUXILIARES (productos)
+// ==========================================
 function agregarFilaProducto(nombre = '', sku = '', precio = '', cantidad = '', atributo = '') {
   productoRowIndex++;
   const tr = document.createElement('tr');
@@ -72,7 +75,7 @@ function agregarFilaProducto(nombre = '', sku = '', precio = '', cantidad = '', 
   const removeBtn = tr.querySelector('.btn-remove-fila');
   removeBtn.addEventListener('click', () => {
     tr.remove();
-    // Si después de eliminar no quedan filas, no hacemos nada (el usuario puede agregar con el botón)
+    // Si después de eliminar no quedan filas, no hacemos nada
   });
   productosBody.appendChild(tr);
 }
@@ -118,7 +121,7 @@ function obtenerProductosFormulario() {
 }
 
 // ==========================================
-//  CARGAR VISTA
+//  CARGAR VISTA (exportada)
 // ==========================================
 export function cargarRegistro() {
   loteForm = document.getElementById('loteForm');
@@ -132,12 +135,12 @@ export function cargarRegistro() {
     return;
   }
 
-  // Inicializar productos con UNA sola fila (cambio aquí)
+  // ===== INICIALIZAR CON UNA SOLA FILA =====
   productosBody.innerHTML = '';
   productoRowIndex = 0;
-  agregarFilaProducto(); // ANTES eran 2, AHORA es 1
+  agregarFilaProducto(); // ← UNA FILA, no dos
 
-  // Inicializar gastos
+  // Inicializar gastos (un solo gasto)
   gastosWrapper.innerHTML = '';
   gastoIndex = 0;
   agregarGasto();
@@ -147,7 +150,11 @@ export function cargarRegistro() {
   console.log('✅ Pantalla de registro inicializada');
 }
 
+// ==========================================
+//  EVENTOS DEL FORMULARIO
+// ==========================================
 function configurarEventosRegistro() {
+  // ===== SUBMIT =====
   loteForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -182,6 +189,7 @@ function configurarEventosRegistro() {
       );
       const precioData = calcularPrecioVenta(costoUnitario, modoPrecio, valorPrecio);
 
+      // ===== CREAR PRODUCTO CON VALORES SEGUROS =====
       const producto = {
         id: generarId(),
         loteId: loteId,
@@ -206,13 +214,13 @@ function configurarEventosRegistro() {
       nuevosProductos.push(producto);
     });
 
-    // Guardar
+    // ===== GUARDAR =====
     guardarLote({ id: loteId, fecha: fechaLlegada, flete, gastosExtra, productos: nuevosProductos.map(p => p.id) });
     const state = store.getState();
     store.setState({ productos: [...state.productos, ...nuevosProductos] });
     guardarProductos();
 
-    // Asiento contable
+    // ===== ASIENTO CONTABLE =====
     const valorLoteTotal = productosData.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
     const totalGastosExtra = gastosExtra.reduce((sum, g) => sum + g.monto, 0);
     const asientoCompra = {
@@ -231,11 +239,14 @@ function configurarEventosRegistro() {
     };
     agregarAsiento(asientoCompra);
 
-    // Resetear formulario: UNA sola fila (cambio aquí)
+    // ===== RESETEAR FORMULARIO (UNA SOLA FILA) =====
     productosBody.innerHTML = '';
-    agregarFilaProducto(); // ANTES eran 2, AHORA es 1
+    productoRowIndex = 0;
+    agregarFilaProducto(); // ← UNA FILA
+
     document.getElementById('flete').value = '0';
     gastosWrapper.innerHTML = '';
+    gastoIndex = 0;
     agregarGasto();
     document.getElementById('modoPrecio').value = 'porcentaje';
     document.getElementById('valorPrecio').value = '40';
@@ -243,6 +254,9 @@ function configurarEventosRegistro() {
     alert(`✅ Lote guardado con ${nuevosProductos.length} productos.`);
   });
 
+  // ===== BOTÓN AGREGAR GASTO =====
   addGastoBtn.addEventListener('click', () => agregarGasto());
+
+  // ===== BOTÓN AGREGAR PRODUCTO =====
   addProductoBtn.addEventListener('click', () => agregarFilaProducto());
-}
+                 }
