@@ -9,7 +9,6 @@ import { cargarInventario } from './ui/ui-inventario.js';
 import { cargarContabilidad } from './ui/ui-contabilidad.js';
 import { cargarSondeo } from './ui/ui-sondeo.js';
 import { cargarEstacionalidad } from './ui/ui-estacionalidad.js';
-import { cerrarModal } from './ui/ui-acciones.js';
 
 // Mapeo de pestañas a funciones de carga
 const viewMap = {
@@ -28,9 +27,11 @@ function cargarHTML(archivo) {
   if (htmlCache[archivo]) {
     return Promise.resolve(htmlCache[archivo]);
   }
-  return fetch(archivo)
+  // Ahora busca en la carpeta views/
+  const ruta = `views/${archivo}`;
+  return fetch(ruta)
     .then(response => {
-      if (!response.ok) throw new Error(`No se pudo cargar ${archivo}`);
+      if (!response.ok) throw new Error(`No se pudo cargar ${ruta} (status: ${response.status})`);
       return response.text();
     })
     .then(html => {
@@ -65,9 +66,11 @@ export function navigateTo(tab) {
     })
     .catch(error => {
       document.getElementById('mainContainer').innerHTML = `
-        <div style="text-align:center; padding:40px; color:#e74c3c;">
+        <div style="text-align:center; padding:40px; color:#ef4444;">
           <i class="fas fa-exclamation-triangle" style="font-size:2rem;"></i>
-          <p>Error al cargar ${archivo}: ${error.message}</p>
+          <p style="margin-top:12px;">Error al cargar ${archivo}</p>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">${error.message}</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:8px;">Verifica que el archivo exista en la carpeta <strong>views/</strong></p>
         </div>
       `;
       console.error(error);
